@@ -1,27 +1,36 @@
 <template>
-<div>
-  <Menu>
-    <transition name="fade">
-      <router-view/>
-    </transition>
-  </Menu>
-
-</div>
+      <transition name="fade">
+        <router-view></router-view>
+      </transition>
 </template>
 
 <script>
 
-import Menu from './components/Menu'
+// import Menu from './components/Menu'
 
 export default {
   name: 'App',
   components:{
-        Menu
+        // Menu
       }
 }
 </script>
 
 <style>
+
+.scroll1::-webkit-scrollbar {
+  width: 5px;
+}
+ 
+.scroll1::-webkit-scrollbar-track {
+  background: #ddd;
+}
+ 
+.scroll1::-webkit-scrollbar-thumb {
+  background: #666; 
+}
+
+
 .fade-enter-active, .fade-leave-active {
   transition-property: opacity;
   transition-duration: .20s;

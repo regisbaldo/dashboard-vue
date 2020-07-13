@@ -1,91 +1,77 @@
 <template>
-    <el-container style="height: 97vh; border: 1px solid #eee">
-  <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-    <el-menu :default-openeds="['1', '3']">
-      <el-submenu index="1">
-        <template slot="title"><i class="el-icon-message"></i>Navigator One</template>
-        <el-menu-item-group>
-          <template slot="title">Group 1</template>
-          <el-menu-item index="1-1">Option 1</el-menu-item>
-          <el-menu-item index="1-2">Option 2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="Group 2">
-          <el-menu-item index="1-3">Option 3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template slot="title">Option4</template>
-          <el-menu-item index="1-4-1">Option 4-1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-submenu index="2">
-        <template slot="title"><i class="el-icon-menu"></i>Navigator Two</template>
-        <el-menu-item-group>
-          <template slot="title">Group 1</template>
-          <el-menu-item index="2-1">Option 1</el-menu-item>
-          <el-menu-item index="2-2">Option 2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="Group 2">
-          <el-menu-item index="2-3">Option 3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="2-4">
-          <template slot="title">Option 4</template>
-          <el-menu-item index="2-4-1">Option 4-1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-submenu index="3">
-        <template slot="title"><i class="el-icon-setting"></i>Navigator Three</template>
-        <el-menu-item-group>
-          <template slot="title">Group 1</template>
-          <el-menu-item index="3-1">Option 1</el-menu-item>
-          <el-menu-item index="3-2">Option 2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="Group 2">
-          <el-menu-item index="3-3">Option 3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="3-4">
-          <template slot="title">Option 4</template>
-          <el-menu-item index="3-4-1">Option 4-1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
+  <el-container style="height: 97vh; border: 1px solid #eee">
+    <el-menu
+      default-active="2"
+      class="el-menu-vertical-demo scroll1"
+      @open="handleOpen"
+      @close="handleClose"
+      :collapse="isCollapse"
+    >
+      <span class="menu-retrail">
+        <el-switch v-model="isCollapse"></el-switch>
+      </span>
+      <el-menu-item index="1">
+        <i class="el-icon-user"></i>
+        <span slot="title">Usuários</span>
+      </el-menu-item>
+      <el-menu-item index="2">
+        <i class="el-icon-money"></i>
+        <span slot="title">Vendas</span>
+      </el-menu-item>
+      <el-menu-item index="3">
+        <i class="el-icon-data-analysis"></i>
+        <span slot="title">Indicadores</span>
+      </el-menu-item>
+      <el-menu-item index="4" @click="drawer = true">
+        <i class="el-icon-setting" ></i>
+        <span slot="title">Configurações</span>
+      </el-menu-item>
+     
     </el-menu>
-  </el-aside>
-  
-  <el-container>
-    <el-header style="height: 40px ;text-align: right; font-size: 12px">
-      <el-dropdown>
-        <i class="el-icon-setting" style="margin-right: 15px"></i>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>View</el-dropdown-item>
-          <el-dropdown-item>Add</el-dropdown-item>
-          <el-dropdown-item>Delete</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-      <span>Tom</span>
-    </el-header>
-    
-    <el-main>
+    <el-container>
+      <el-main class="scroll1">
         <slot></slot>
-    </el-main>
+      </el-main>
+    </el-container>
+    <el-drawer title="Configurações" :visible.sync="drawer" direction="ltr">
+      <p>Trocar de Sistema</p>
+      <el-button type="danger">Deslogar</el-button>
+    </el-drawer>
   </el-container>
-</el-container>
 </template>
 
 <script>
-
-
 export default {
-  name: 'Menu',
-}
+  name: "Menu",
+  data() {
+    return {
+      isCollapse: false,
+      drawer: false
+    };
+  },
+  methods: {
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    }
+  }
+};
 </script>
 
 <style>
-.el-header {
-    background-color: #B3C0D1;
-    color: #333;
-    line-height: 60px;
-  }
-  
-  .el-aside {
-    color: #333;
-  }
+.menu-retrail {
+  padding-left: 15px;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  display: block;
+}
 </style>
